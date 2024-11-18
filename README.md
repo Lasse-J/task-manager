@@ -3,11 +3,13 @@ by Lasse Juusela
 
 ## Tech Stack:
 
+```
 JavaScript
 Next.js
 Tailwind CSS
-KindeAuth
 ShadCN
+KindeAuth
+```
 
 ## Getting Started
 

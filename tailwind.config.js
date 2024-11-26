@@ -78,8 +78,8 @@ module.exports = {
             }
         },
         animation: {
-            "appear": "appear 1s ease-in-out",
-            "slide": "slide 750ms ease-in-out",
+            "appear": "appear 2s ease-in-out",
+            "slide": "slide 1250ms ease-in-out",
         },
   	}
   },

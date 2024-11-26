@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { Header } from '@/components/Header-landing';
+import { Header } from '@/components/Header';
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >      
-          <div className="mx-auto w-full animate-appear">
+          <div className="mx-auto w-3/4 px-4 animate-appear">
             <Header />
               <div>
                 {children}

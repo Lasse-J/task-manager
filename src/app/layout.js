@@ -1,11 +1,11 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { Header } from '@/components/Header';
+import { Header } from '@/components/Header-landing';
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata = {
   title: "Task Manager",
-  description: "Created with NextJS",
+  description: "Task manager app by Lasse Juusela",
 };
 
 export default function RootLayout({ children }) {
@@ -18,9 +18,9 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >      
-          <div className="mx-auto w-full max-w-7xl animate-appear">
+          <div className="mx-auto w-full animate-appear">
             <Header />
-              <div className="px-4 py-2">
+              <div>
                 {children}
               </div>
           </div>

@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >      
-          <div className="mx-auto w-3/4 px-4 animate-appear">
+          <div className="mx-auto w-full sm:w-3/4 px-0 animate-appear">
             <Header />
               <div>
                 {children}

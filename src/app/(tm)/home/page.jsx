@@ -63,7 +63,7 @@ export default function Home() {
       <main className="flex flex-col justify-center text-center max-w-5xl mx-auto h-dvh">
         <div className={`panel flex flex-col gap-6 p-12 rounded-xl w-3/4 sm:max-w-fit mx-auto sm:text-xl ${panelStyles}`}>
           
-          <h1 className="text-4xl font-bold">Task Manager</h1>
+          <h1 className="sm:text-4xl text-xl font-bold">Task Manager</h1>
           
           <div className="input-section">
             <input 
@@ -84,7 +84,7 @@ export default function Home() {
           </div>
 
           <div className="todo-items">
-            <h2 className="text-2xl font-semibold mb-2">Your Tasks</h2>
+            <h2 className="sm:text-2xl text-l font-semibold mb-2">Your Tasks</h2>
             {tasks
               .filter((task) => !task.completed)
               .map((task) => (

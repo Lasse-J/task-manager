@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTheme } from "next-themes"
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
+  const { theme } = useTheme()
   const [tasks, setTasks] = useState([])
   const [taskName, setTaskName] = useState('')
   const [dueDate, setDueDate] = useState('')
@@ -27,7 +29,8 @@ export default function Home() {
         { id: Date.now(),
           name: taskName,
           date: dueDate,
-          completed: false
+          completed: false,
+          archived: false
         }
       ])
       setTaskName('')
@@ -41,10 +44,24 @@ export default function Home() {
     ))
   }
 
+  const deleteTask = (taskId) => {
+    setTasks(tasks.map((task) =>
+      task.id === taskId ? { ...task, archived:true } : task
+    ))
+  }
+
+  const panelStyles = theme === 'dark'
+    ? 'bg-black/85 text-white'
+    : 'bg-white/95 text-black'
+
+  const inputStyles = theme === 'dark'
+    ? 'bg-gray-800 text-white'
+    : 'bg-white text-black'
+
 	return (
     <div className="bg-black bg-wallpaper-steampunk bg-cover bg-center">
       <main className="flex flex-col justify-center text-center max-w-5xl mx-auto h-dvh">
-        <div className="panel flex flex-col gap-6 p-12 rounded-xl bg-black/85 w-3/4 sm:max-w-fit mx-auto text-white sm:text-xl">
+        <div className={`panel flex flex-col gap-6 p-12 rounded-xl w-3/4 sm:max-w-fit mx-auto sm:text-xl ${panelStyles}`}>
           
           <h1 className="text-4xl font-bold">Task Manager</h1>
           
@@ -52,14 +69,14 @@ export default function Home() {
             <input 
               type="text"
               name="todo-input"
-              className="todo-input bgcolor-white text-white"
+              className={`todo-input mx-3 rounded ${inputStyles}`}
               placeholder="Task name"
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
             />
             <input
               type="date"
-              className="due-date-input"
+              className={`due-date-input mx-3 rounded ${inputStyles}`}
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
             />
@@ -73,7 +90,7 @@ export default function Home() {
               .map((task) => (
                 <div 
                   key={task.id}
-                  className="task-item flex justify-between items-center p-2 mb-2"
+                  className="task-item flex justify-between text-left items-center p-2 mb-2"
                 >
                   <div>
                     <p className="font-semibold">{task.name}</p>
@@ -92,16 +109,22 @@ export default function Home() {
 
           <div className="completed-items">
             {tasks
-              .filter((task) => task.completed)
+              .filter((task) => task.completed && !task.archived)
               .map((task) => (
                 <div
                   key={task.id}
-                  className="completed-task-item flex justify-between items-center p-2 mb-2"
+                  className="completed-task-item flex justify-between text-left items-center p-2 mb-2"
                 >
                   <div>
                     <p className="font-semibold line-through">{task.name}</p>
                     <p className="text-sm text-gray-400">Due: {task.date}</p>
                   </div>
+                  <Button
+                    className="delete-button text-sm"
+                    onClick={() => deleteTask(task.id)}
+                  >
+                    Delete task
+                  </Button>
                 </div>
               ))
             }

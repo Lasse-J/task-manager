@@ -9,6 +9,14 @@ export default function Home() {
   const [tasks, setTasks] = useState([])
   const [taskName, setTaskName] = useState('')
   const [dueDate, setDueDate] = useState('')
+  const [isDark, setIsDark] = useState(true)
+
+  // Set dark mode when first loaded
+  useEffect(() => {
+    if (theme) {
+      setIsDark(theme === 'dark')
+    }
+  }, [theme])
 
   // Loading tasks from local storage when the app initializes
   useEffect(() => {
@@ -50,7 +58,7 @@ export default function Home() {
     ))
   }
 
-  const panelStyles = theme === 'dark'
+  const panelStyles = isDark
     ? 'bg-black/85 text-white'
     : 'bg-white/95 text-black'
 

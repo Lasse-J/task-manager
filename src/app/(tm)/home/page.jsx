@@ -88,7 +88,7 @@ export default function Home() {
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
             />
-            <Button className="create-button mx-5" onClick={addTask}>Add</Button>
+            <Button className="create-button my-1 sm:my-0 mx-5" onClick={addTask}>Add</Button>
           </div>
 
           <div className="todo-items">

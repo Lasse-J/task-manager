@@ -69,7 +69,7 @@ export default function Home() {
 	return (
     <div className="bg-black bg-wallpaper-steampunk bg-cover bg-center">
       <main className="flex flex-col justify-center text-center max-w-5xl mx-auto h-dvh">
-        <div className={`panel flex flex-col gap-6 p-12 rounded-xl w-3/4 sm:max-w-fit mx-auto sm:text-xl ${panelStyles}`}>
+        <div className={`panel flex flex-col gap-1 sm:gap-6 p-1 sm:p-12 rounded-xl max-w-fit mx-auto text-base sm:text-lg ${panelStyles}`}>
           
           <h1 className="sm:text-4xl text-xl font-bold">Task Manager</h1>
           
@@ -77,14 +77,14 @@ export default function Home() {
             <input 
               type="text"
               name="todo-input"
-              className={`todo-input mx-3 rounded ${inputStyles}`}
+              className={`todo-input mx-1 sm:mx-3 max-w-fit rounded ${inputStyles}`}
               placeholder="Task name"
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
             />
             <input
               type="date"
-              className={`due-date-input mx-3 rounded ${inputStyles}`}
+              className={`due-date-input mx-1 sm:mx-3 rounded ${inputStyles}`}
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
             />
@@ -92,23 +92,23 @@ export default function Home() {
           </div>
 
           <div className="todo-items">
-            <h2 className="sm:text-2xl text-l font-semibold mb-2">Your Tasks</h2>
+            <h2 className="sm:text-2xl text-lg font-semibold mb-2">Your Tasks</h2>
             {tasks
               .filter((task) => !task.completed)
               .map((task) => (
                 <div 
                   key={task.id}
-                  className="task-item flex justify-between text-left items-center p-2 mb-2"
+                  className="task-item flex justify-between text-left items-center p-1 mb-2"
                 >
                   <div>
-                    <p className="font-semibold">{task.name}</p>
+                    <p className="text-sm sm:text-base font-semibold">{task.name}</p>
                     <p className="text-sm text-gray-400">Due: {task.date}</p>
                   </div>
                   <Button
                     className="complete-button text-sm"
                     onClick={() => markAsCompleted(task.id)}
                   >
-                    Mark as Done
+                    Done
                   </Button>
                 </div>
               ))
@@ -121,7 +121,7 @@ export default function Home() {
               .map((task) => (
                 <div
                   key={task.id}
-                  className="completed-task-item flex justify-between text-left items-center p-2 mb-2"
+                  className="completed-task-item flex justify-between text-left items-center p-1 mb-2"
                 >
                   <div>
                     <p className="font-semibold line-through">{task.name}</p>
@@ -131,7 +131,7 @@ export default function Home() {
                     className="delete-button text-sm"
                     onClick={() => deleteTask(task.id)}
                   >
-                    Delete task
+                    Remove
                   </Button>
                 </div>
               ))

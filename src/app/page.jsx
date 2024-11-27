@@ -18,7 +18,7 @@ export default function Landing() {
           <h1 className="text-4xl font-bold">Your Favorite <br />Task Manager</h1>
           
           <address className="text-xl">
-            "All we have to decide is<br/> what to do with the time<br/> that is given to us."<br />
+            All we have to decide is<br/> what to do with the time<br/> that is given to us.<br />
             -Gandalf
           </address>
 

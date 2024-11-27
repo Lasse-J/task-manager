@@ -38,6 +38,7 @@ export default function Home() {
           name: taskName,
           date: dueDate,
           completed: false,
+          deleted: false,
           archived: false
         }
       ])
@@ -53,6 +54,12 @@ export default function Home() {
   }
 
   const deleteTask = (taskId) => {
+    setTasks(tasks.map((task) =>
+      task.id === taskId ? { ...task, deleted: true } : task
+    ))
+  }
+
+  const archiveTask = (taskId) => {
     setTasks(tasks.map((task) =>
       task.id === taskId ? { ...task, archived:true } : task
     ))
@@ -94,22 +101,30 @@ export default function Home() {
           <div className="todo-items">
             <h2 className="sm:text-2xl text-lg font-semibold mb-2">Your Tasks</h2>
             {tasks
-              .filter((task) => !task.completed)
+              .filter((task) => !task.completed && !task.deleted && !task.archived)
               .map((task) => (
                 <div 
                   key={task.id}
-                  className="task-item flex justify-between text-left items-center p-1 mb-2"
+                  className="task-item flex text-left justify-between items-center p-1 mb-2"
                 >
                   <div>
                     <p className="text-sm sm:text-base font-semibold">{task.name}</p>
                     <p className="text-sm text-gray-400">Due: {task.date}</p>
                   </div>
-                  <Button
-                    className="complete-button text-sm"
-                    onClick={() => markAsCompleted(task.id)}
-                  >
-                    Done
-                  </Button>
+                  <div>
+                    <Button
+                      className="complete-button text-sm mx-2"
+                      onClick={() => markAsCompleted(task.id)}
+                    >
+                      Done
+                    </Button>
+                    <Button
+                      className="delete-button text-sm"
+                      onClick={() => deleteTask(task.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </div>
               ))
             }
@@ -117,7 +132,7 @@ export default function Home() {
 
           <div className="completed-items">
             {tasks
-              .filter((task) => task.completed && !task.archived)
+              .filter((task) => task.completed && !task.deleted && !task.archived)
               .map((task) => (
                 <div
                   key={task.id}
@@ -128,10 +143,10 @@ export default function Home() {
                     <p className="text-sm text-gray-400">Due: {task.date}</p>
                   </div>
                   <Button
-                    className="delete-button text-sm"
-                    onClick={() => deleteTask(task.id)}
+                    className="archive-button text-sm"
+                    onClick={() => archiveTask(task.id)}
                   >
-                    Remove
+                    Archive
                   </Button>
                 </div>
               ))
